@@ -28,7 +28,7 @@ Commandes disponibles :
 
 ## Contributeurs
 
-Ce projet est réalisé par [votre nom] et [autres contributeurs]. Les contributions sont les bienvenues !
+Ce projet est réalisé par [Othman] et [Samy]. Les contributions sont les bienvenues !
 
 ## Licence
 
