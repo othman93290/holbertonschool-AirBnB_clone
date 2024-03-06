@@ -1,9 +1,4 @@
 # AirBnB Clone - The Console
-![65f4a1dd9c51265f49d0](https://github.com/alfredgibeau-ahoussinou/holbertonschool-AirBnB_clone/assets/146840606/e13fb4b1-a83a-4663-8f7e-75029d3e1acc)
-
-[![Project Badge](https://img.shields.io/badge/Project-AirBnB%20Clone-blue)](https://github.com/your-username/your-repo)
-
-Novice | By: Guillaume | Weight: 5
 
 Project to be done in teams of 2 people (your team: Othman and Samy)
 
