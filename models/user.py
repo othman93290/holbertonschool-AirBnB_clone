@@ -1,4 +1,4 @@
-from base_model import BaseModel
+from models.base_model import BaseModel
 
 class User(BaseModel):
     def __init__(self, username, email, full_name, *args, **kwargs):
