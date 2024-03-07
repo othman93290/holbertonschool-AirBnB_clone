@@ -1,35 +1,54 @@
-import os
+#!/usr/bin/python3
+"""Module for FileStorage class"""
+from os import path
 import json
 
+
 class FileStorage:
-    def __init__(self):
-        self.__file_path = 'file_storage.json'
-        self.__objects = {}
+    """
+    Description: FileStorage class that serializes instances to
+    a JSON file and deserializes JSON file to instances.
+
+    Attributes:
+        __file_path (str): path to the JSON file
+        __objects (dict): dictionary for storing objects (class name.id)
+
+    Methods:
+        all: return the dictionary __objects
+        new: set in __objects the obj with key <obj class name>.id
+        save: serialize __objects (__objects -> JSON)
+        reload: deserialize the JSON file to __objects (JSON -> __objects)
+    """
+    __file_path = "file.json"
+    __objects = {}
 
     def all(self):
+        """Method to return all of the __objects dictionary"""
         return self.__objects
 
     def new(self, obj):
-        class_name = obj.__class__.__name__
-        key = "{}.{}".format(class_name, obj.id)
+        """Method to set in __objects the given object"""
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
         self.__objects[key] = obj
 
     def save(self):
-        obj_dict = {key: obj.to_dict() for key, obj in self.__objects.items()}
-        with open(self.__file_path, 'w') as file:
-            json.dump(obj_dict, file)
+        """Serialize __objects to the JSON file"""
+        obj_dict = {obj_id: obj.to_dict() for obj_id, obj
+                    in self.__objects.items()}
+        with open(self.__file_path, "w") as newfile:
+            json.dump(obj_dict, newfile)
 
     def reload(self):
-        if os.path.exists(self.__file_path):
-            with open(self.__file_path, 'r') as file:
-                obj_dict = json.load(file)
-                for key, value in obj_dict.items():
-                    class_name, obj_id = key.split('.')
-                    obj_class = globals()[class_name]
-                    new_instance = obj_class(**value)
-                    self.__objects[key] = new_instance
+        """Method to deserialize the JSON file to __objects"""
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.city import City
+        from models.state import State
+        from models.amenity import Amenity
+        from models.place import Place
+        from models.review import Review
 
-# Reloading the saved instance
-new_file_storage = FileStorage()
-new_file_storage.reload()
-print(new_file_storage.all())
+        if path.exists(self.__file_path):
+            with open(self.__file_path, "r") as file:
+                for value in json.loads(file.read()).values():
+                    eval(value["__class__"])(**value)
