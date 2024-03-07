@@ -36,5 +36,3 @@ class BaseModel:
     def from_json(cls, json_str):
         data_dict = json.loads(json_str)
         return cls.from_dict(data_dict)
-
-if __name__ == __main__
