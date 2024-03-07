@@ -1,3 +1,7 @@
+import json
+import uuid
+from datetime import datetime
+
 class BaseModel:
     def __init__(self, *args, **kwargs):
         self.id = str(uuid.uuid4())
@@ -6,7 +10,6 @@ class BaseModel:
 
     def to_dict(self):
         return {
-            '__class__': self.__class__.__name__,
             'id': self.id,
             'created_at': self.created_at.isoformat(),
             'updated_at': self.updated_at.isoformat()
@@ -33,3 +36,5 @@ class BaseModel:
     def from_json(cls, json_str):
         data_dict = json.loads(json_str)
         return cls.from_dict(data_dict)
+
+if __name__ == __main__
